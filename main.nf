@@ -1,33 +1,43 @@
 #!/usr/bin/env nextflow
 
-ch_flat = Channel.fromFilePairs("${params.s3_folder}/*{vcf.gz,csi}", flat: true)
-ch_notflat = Channel.fromFilePairs("${params.s3_folder}/*{vcf.gz,csi}")
-
-process print_filename {
-  echo true
-  
-  input: 
-  set val(vcf_basename), val(vcf_path), val(csi_path) from ch_flat
-  
-  output: 
-  file("${vcf_basename}_print.txt") into ch_force_serial
-
-  script:
-  """
-  echo "pre: $vcf_basename\nvcf: $vcf_path\ncsi: $csi_path" 
-  echo "pre: $vcf_basename\nvcf: $vcf_path\ncsi: $csi_path" > ${vcf_basename}_print.txt
-  """
+// Re-usable componext for adding a helpful help message in our Nextflow script
+def helpMessage() {
+    log.info"""
+    Usage:
+    The typical command for running the pipeline is as follows:
+    nextflow run main.nf --fastq_list fastq_files_list.csv
+    Mandatory arguments:
+      --fastq_list                  [file] A comma seperated file with all the https file locations
+                                    A header is expected, and 2 columns that define the following:
+                                    - name, desired file name based on metadata
+                                    - link (ftp, https) to the file
+                                    
+                                    A file could look like this:
+                                    name,https_links
+                                    this,https://this.vcf
+    """.stripIndent()
 }
 
-process print_filename_not_flat {
+// Re-usable component to create a channel with the links of the files by reading the design file
+Channel
+    .fromPath(params.https_list)
+    .ifEmpty { error "No file with list of https file links to download from found at the location ${params.https_list}" }
+    .splitCsv(sep: ',', skip: 1)
+    .map { name, https_link -> [ name, https_link, https_link.toString().tokenize('.').last() ] }
+    .set {ch_https_links}
+
+process get_file {
   echo true
-  
+  publishDir "results/${suffix}/", mode: 'copy'
+
   input: 
-  set val(vcf_basename), val(pair) from ch_notflat
-  file(pseudo_dependency) from ch_force_serial
+  set val(name), val(https_link), val(suffix) from ch_https_links
+  
+  output: 
+  file("${name}.${suffix}") into ch_retrieved_files
 
   script:
   """
-  echo "pre: $vcf_basename\npair: $pair"
+  wget -O "${name}.${suffix}" ${https_link} 
   """
 }

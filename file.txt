@@ -1,0 +1,3 @@
+name,https_link
+this,https://images.vexels.com/media/users/3/132327/isolated/preview/b138409b48576b4ca615f07fd15d8a8d-squash-circle-icon-by-vexels.png
+that,https://image.flaticon.com/icons/png/512/1112/1112292.png
