@@ -1,7 +1,25 @@
-# tinynf
+# https-download
 
-Test retrieving file paths without staging the files from an S3 bucket:
+Minimal pipeline to retrieve files from https links and rename them based on desired name and initial file suffix.
+
+## Usage:
+
+The typical command for running the pipeline is as follows:
+
+```
+nextflow run main.nf --https_list input.csv
+```
+
+Mandatory arguments:
+    --https_list                  [file] A comma seperated file with all the https file locations
+                                A header is expected, and 2 columns that define the following:
+                                - name, desired file name based on metadata
+                                - link (ftp, https) to the file
+                                
+                                A file could look like this:
+                                name,https_links
+                                this,https://this.vcf
 
 ```bash
-nextflow run lifebit-ai/tinynf --s3_folder s3://lifebit-featured-datasets/projects/avt/vcf-tests/
+nextflow run lifebit-ai/https-download --https_list input.csv
 ```
