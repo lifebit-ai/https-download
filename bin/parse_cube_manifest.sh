@@ -6,7 +6,7 @@
 
 print_usage() {
   printf "\n"
-  printf "Usgae: parse_cube_manifest.sh -m manifest.json \n\n"
+  printf "Usage: parse_cube_manifest.sh -m manifest.json \n\n"
   printf "   -m:    A input manifest file (ex - manifest.json) [required] \n"
   printf "   -o:    A output file name (ex - manifest.csv) [optional] \n"
   printf "          If no output given it will be same as input \n"
