@@ -1,0 +1,23 @@
+[
+    {
+        "subject_id": "0574",
+        "error": null,
+        "file_path": "/parsed-sequencing/fusionseq2/0574_S5_filtered_fusions.txt",
+        "file_uri": "https://mcgidata-abc",
+        "type": "txt"
+    },
+    {
+        "subject_id": "0574",
+        "error": null,
+        "file_path": "/parsed-sequencing/aga2/CNV_output/0574_S6.CNATable_merged_geneLevel_allGenes.txt",
+        "file_uri": "https://mcgidata-bcd",
+        "type": "txt"
+    },
+    {
+        "subject_id": "0574",
+        "error": null,
+        "file_path": "/parsed-sequencing/aga2/0574_S6_UG_variants.filtered.vcf",
+        "file_uri": "https://mcgidata-cde",
+        "type": "vcf"
+    }
+]
