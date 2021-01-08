@@ -1,0 +1,4 @@
+subject_id,file_urifile_path
+574,https://mcgidata-abc/parsed-sequencing/fusionseq2/0574_S5_filtered_fusions.txt
+574,https://mcgidata-bcd/parsed-sequencing/aga2/CNV_output/0574_S6.CNATable_merged_geneLevel_allGenes.txt
+574,https://mcgidata-cde/parsed-sequencing/aga2/0574_S6_UG_variants.filtered.vcf
