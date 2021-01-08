@@ -32,5 +32,5 @@ Convert the CUBE manifest.json file to manifest.csv file to be used as input in 
 
 ```bash
 pip install csvkit
-bash bin/parse_manifest.sh -m testdata/manifest.json 
+bash bin/parse_manifest.sh -m testdata/manifest.json -o manifest.csv
 ```

@@ -29,7 +29,7 @@ do
     esac
 done
 
-# check if output file name is given or else based on input file
+# check required params
 if [ -z "$manifest_json" ]; then
   echo "A input is required in json format, Check help -h"
   exit 1 ; 
